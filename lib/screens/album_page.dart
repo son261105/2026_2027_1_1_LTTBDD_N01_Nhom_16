@@ -86,8 +86,118 @@ class _AlbumPageState extends State<AlbumPage> {
               isShuffle: _isShuffle,
               onShuffle: _toggleShuffle,
             ),
+            const SizedBox(height: 36),
+            _AlbumSongTable(songs: _songs),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AlbumSongTable extends StatelessWidget {
+  final List<_AlbumSong> songs;
+
+  const _AlbumSongTable({required this.songs});
+
+  Widget _columns({
+    required Widget number,
+    required Widget title,
+    required Widget artist,
+    required Widget duration,
+  }) {
+    return Row(
+      children: [
+        SizedBox(width: 44, child: Center(child: number)),
+        const SizedBox(width: 12),
+        Expanded(flex: 3, child: title),
+        const SizedBox(width: 16),
+        Expanded(flex: 2, child: artist),
+        SizedBox(
+          width: 64,
+          child: Align(alignment: Alignment.centerRight, child: duration),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 12, 16, 20),
+            child: _columns(
+              number: const Text('#'),
+              title: const Text(
+                'Tiêu đề',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              artist: const Text(
+                'Nghệ sĩ',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              duration: const Icon(
+                Icons.access_time,
+                color: AppColors.textSecondary,
+                size: 20,
+              ),
+            ),
+          ),
+          for (var index = 0; index < songs.length; index++)
+            Padding(
+              padding: const EdgeInsets.only(right: 16, top: 10, bottom: 10),
+              child: _columns(
+                number: Text('${index + 1}'),
+                title: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Image.asset(
+                        songs[index].image,
+                        width: 46,
+                        height: 46,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const SizedBox(
+                              width: 46,
+                              height: 46,
+                              child: ColoredBox(
+                                color: AppColors.surface,
+                                child: Icon(
+                                  Icons.music_note,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        songs[index].title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                artist: const Text(
+                  _artistName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                duration: Text(songs[index].duration),
+              ),
+            ),
+        ],
       ),
     );
   }
