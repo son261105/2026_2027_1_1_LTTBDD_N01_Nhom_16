@@ -5,6 +5,7 @@ import '../widgets/player_bar.dart';
 import '../widgets/queue_panel.dart';
 import '../widgets/sidebar.dart';
 import '../widgets/top_bar.dart';
+import 'album_page.dart';
 import 'artist_page.dart';
 import 'home_page.dart';
 import 'playlist_page.dart';
@@ -32,6 +33,8 @@ class HomeScreen extends StatelessWidget {
         return const SongPage();
       case AppPage.artist:
         return const ArtistPage();
+      case AppPage.album:
+        return const AlbumPage();
     }
   }
 

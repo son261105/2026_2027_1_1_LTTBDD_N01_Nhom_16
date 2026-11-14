@@ -21,7 +21,11 @@ class CoverArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget content = image != null
-        ? Image.asset(image!, fit: BoxFit.cover)
+        ? Image.asset(
+            image!,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stack) => Container(color: color),
+          )
         : DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(

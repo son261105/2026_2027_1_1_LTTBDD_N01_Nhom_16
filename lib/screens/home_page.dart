@@ -175,10 +175,10 @@ const _charts = [
     ),
     _ChartSong(
       'Thế Nào Là Đúng?',
-      'Nghệ sĩ K',
+      'Bảo Anh',
       Color(0xFFD946EF),
       image: 'imgs/TheNaoLaDung.jpg',
-      artistImages: ['imgs/NgheSiK.jpg'],
+      artistImages: ['imgs/BaoAnh.jpg'],
     ),
   ]),
 ];
@@ -585,76 +585,81 @@ class _AlbumCardState extends State<_AlbumCard> {
   Widget build(BuildContext context) {
     final album = widget.album;
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: _hover ? AppColors.surface : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: CoverArt(
-                    color: album.color,
-                    image: album.image,
-                    icon: Icons.album,
-                    radius: 8,
+    return GestureDetector(
+      onTap: album.name == 'M-TP'
+          ? () => currentPage.value = AppPage.album
+          : null,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _hover = true),
+        onExit: (_) => setState(() => _hover = false),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: _hover ? AppColors.surface : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: CoverArt(
+                      color: album.color,
+                      image: album.image,
+                      icon: Icons.album,
+                      radius: 8,
+                    ),
                   ),
-                ),
-                Positioned(
-                  right: 6,
-                  bottom: 6,
-                  child: AnimatedOpacity(
-                    opacity: _hover ? 1 : 0,
-                    duration: const Duration(milliseconds: 150),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color: _cyan,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.play_arrow,
-                        color: Colors.black,
-                        size: 24,
+                  Positioned(
+                    right: 6,
+                    bottom: 6,
+                    child: AnimatedOpacity(
+                      opacity: _hover ? 1 : 0,
+                      duration: const Duration(milliseconds: 150),
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: _cyan,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.play_arrow,
+                          color: Colors.black,
+                          size: 24,
+                        ),
                       ),
                     ),
                   ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                album.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              album.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              album.artist,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 12,
+              const SizedBox(height: 4),
+              Text(
+                album.artist,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 12,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

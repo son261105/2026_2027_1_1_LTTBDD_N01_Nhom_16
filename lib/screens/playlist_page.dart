@@ -66,7 +66,7 @@ class _PlaylistHeader extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.asset(
-            'imgs/NhacChill.jpg',
+            'imgs/NgheSiDenVau.jpg',
             width: 240,
             height: 240,
             fit: BoxFit.cover,

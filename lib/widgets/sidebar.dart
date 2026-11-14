@@ -64,14 +64,14 @@ class Sidebar extends StatelessWidget {
               _LibraryItem(
                 color: const Color(0xFF0EA5A4),
                 label: 'Nhạc chill',
-                imagePath: 'imgs/NhacChill.jpg',
+                imagePath: 'imgs/NgheSiDenVau.jpg',
                 selected: page == AppPage.playlistChill,
                 onTap: () => currentPage.value = AppPage.playlistChill,
               ),
               const _LibraryItem(
                 color: Color(0xFF6D28D9),
                 label: 'Nhạc remix',
-                imagePath: 'imgs/NhacRemix.jpg',
+                imagePath: 'imgs/NhuMotNguoiDung.jpg',
               ),
             ],
           ),
