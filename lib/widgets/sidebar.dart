@@ -52,13 +52,6 @@ class Sidebar extends StatelessWidget {
                   selected: page == AppPage.recent,
                   onTap: () => currentPage.value = AppPage.recent,
                 ),
-                _LibraryItem(
-                  icon: Icons.mic,
-                  color: const Color(0xFF8B5CF6),
-                  label: 'Nghệ sĩ yêu thích',
-                  selected: page == AppPage.favoriteArtists,
-                  onTap: () => currentPage.value = AppPage.favoriteArtists,
-                ),
                 const SizedBox(height: 28),
                 const _SectionTitle('PLAYLIST ĐÃ TẠO', showAdd: true),
                 const SizedBox(height: 8),
