@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
 class MinePage extends StatelessWidget {
@@ -20,7 +21,140 @@ class MinePage extends StatelessWidget {
         padding: EdgeInsets.all(32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_ProfileHeader()],
+          children: [_ProfileHeader(), SizedBox(height: 20), _LibrarySummary()],
+        ),
+      ),
+    );
+  }
+}
+
+class _LibrarySummary extends StatelessWidget {
+  const _LibrarySummary();
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth >= 600
+            ? ((constraints.maxWidth - 20) / 2).clamp(0.0, 340.0).toDouble()
+            : constraints.maxWidth.clamp(0.0, 340.0).toDouble();
+        return SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.start,
+            spacing: 20,
+            runSpacing: 16,
+            children: [
+              SizedBox(
+                width: width,
+                child: _SummaryCard(
+                  title: 'Bài hát yêu thích',
+                  subtitle: '3 bài hát',
+                  icon: Icons.favorite,
+                  colors: const [Color(0xFF465151), Color(0xFF172323)],
+                  image: 'imgs/AlbumMTP.jpg',
+                  onTap: () => currentPage.value = AppPage.favoriteSongs,
+                ),
+              ),
+              SizedBox(
+                width: width,
+                child: _SummaryCard(
+                  title: 'Nghe gần đây',
+                  subtitle: '4 bài hát',
+                  icon: Icons.history_rounded,
+                  colors: const [
+                    Color(0xFF59B1BC),
+                    Color(0xFF155896),
+                    Color(0xFF092431),
+                  ],
+                  iconColor: const Color(0xFF38BDF8),
+                  onTap: () => currentPage.value = AppPage.recent,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SummaryCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final List<Color> colors;
+  final Color iconColor;
+  final String? image;
+  final VoidCallback? onTap;
+
+  const _SummaryCard({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.colors,
+    this.iconColor = Colors.white,
+    this.image,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: const Color(0xFF303733),
+      borderRadius: BorderRadius.circular(24),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Container(
+                width: 72,
+                height: 72,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: colors,
+                  ),
+                  image: image == null
+                      ? null
+                      : DecorationImage(
+                          image: AssetImage(image!),
+                          fit: BoxFit.cover,
+                        ),
+                ),
+                child: Icon(icon, color: iconColor, size: 36),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -88,7 +222,7 @@ class _ProfileHeader extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
-                      'Miễn phí',
+                      'Free',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
