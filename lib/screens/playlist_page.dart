@@ -46,83 +46,104 @@ class PlaylistPage extends StatelessWidget {
         padding: EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_PlaylistHeader(), SizedBox(height: 32), _SongTable()],
+          children: [PlaylistHeader(), SizedBox(height: 32), _SongTable()],
         ),
       ),
     );
   }
 }
 
-class _PlaylistHeader extends StatelessWidget {
-  const _PlaylistHeader();
+class PlaylistHeader extends StatelessWidget {
+  final String title;
+  final String image;
+  final String? description;
+  final int? songCount;
+  final bool showPlaylistLabel;
+  final double titleFontSize;
+  final bool alignContentToCover;
+
+  const PlaylistHeader({
+    super.key,
+    this.title = 'Nhạc chill',
+    this.image = 'imgs/NgheSiDenVau.jpg',
+    this.description,
+    this.songCount,
+    this.showPlaylistLabel = true,
+    this.titleFontSize = 48,
+    this.alignContentToCover = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final artists = _songs.map((s) => s.artist).toSet().join(', ');
+    final artists =
+        description ?? _songs.map((s) => s.artist).toSet().join(', ');
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            'imgs/NgheSiDenVau.jpg',
-            width: 240,
-            height: 240,
-            fit: BoxFit.cover,
-          ),
+          child: Image.asset(image, width: 240, height: 240, fit: BoxFit.cover),
         ),
         const SizedBox(width: 24),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Playlist',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'Nhạc chill',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 48,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                artists,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                '${_songs.length} bài hát',
-                style: const TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Row(
-                children: [
-                  _PlayAllButton(),
-                  SizedBox(width: 12),
-                  _ShuffleButton(),
+          child: SizedBox(
+            height: alignContentToCover ? 240 : null,
+            child: Column(
+              mainAxisAlignment: alignContentToCover
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (showPlaylistLabel) ...[
+                  const Text(
+                    'Playlist',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
                 ],
-              ),
-            ],
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  artists,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  '${songCount ?? _songs.length} bài hát',
+                  style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Row(
+                  children: [
+                    _PlayAllButton(),
+                    SizedBox(width: 12),
+                    _ShuffleButton(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

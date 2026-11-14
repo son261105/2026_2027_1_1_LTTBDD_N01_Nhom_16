@@ -147,7 +147,7 @@ class _LibrarySummary extends StatelessWidget {
                 width: width,
                 child: _SummaryCard(
                   title: 'Bài hát yêu thích',
-                  subtitle: '3 bài hát',
+                  subtitle: '4 bài hát',
                   icon: Icons.favorite,
                   colors: const [Color(0xFF465151), Color(0xFF172323)],
                   image: 'imgs/AlbumMTP.jpg',
