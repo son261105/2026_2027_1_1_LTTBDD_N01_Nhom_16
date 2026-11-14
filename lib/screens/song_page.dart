@@ -46,10 +46,78 @@ class _SongView extends StatelessWidget {
           children: [
             _SongHeader(song),
             const SizedBox(height: 40),
+            if (song.title == 'Tìm Em') ...[
+              const _TimEmLyrics(),
+              const SizedBox(height: 32),
+            ],
             _ArtistsSection(song.artists),
           ],
         ),
       ),
+    );
+  }
+}
+
+const _timEmLyrics = [
+  'Ngồi ngẩn ngơ, anh hát vu vơ những bản tình ca năm ấy',
+  'Có đôi lần khẽ cười vì anh chợt nhớ người làm anh say',
+  'Từ giọng nói như rót mật bên tai hay là từ những lúc dỗi hờn anh sai',
+  'Nhiều khi anh cứ ngỡ là người vẫn còn nơi đây',
+  '',
+  'Từng viết cho em ngàn câu ca, giờ hóa thành kí ức chẳng thể phai nhòa',
+  'Từng màu buồn nỗi đau dường như đều đang than tiếc đôi ta',
+  'Một lần này nữa thôi, người ơi',
+  'Bàn tay này anh sẽ nắm, chẳng nỡ buông ra',
+  'Mặc dòng người cứ thế lướt qua, anh chỉ cần mỗi đôi ta',
+];
+
+class _TimEmLyrics extends StatefulWidget {
+  const _TimEmLyrics();
+
+  @override
+  State<_TimEmLyrics> createState() => _TimEmLyricsState();
+}
+
+class _TimEmLyricsState extends State<_TimEmLyrics> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Lời bài hát',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          (_expanded ? _timEmLyrics : _timEmLyrics.take(4)).join('\n'),
+          style: const TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 15,
+            height: 1.5,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        TextButton(
+          onPressed: () => setState(() => _expanded = !_expanded),
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.zero,
+            alignment: Alignment.centerLeft,
+            textStyle: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          child: Text(_expanded ? 'Thu gọn' : '...Xem thêm'),
+        ),
+      ],
     );
   }
 }
