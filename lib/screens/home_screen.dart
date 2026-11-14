@@ -8,6 +8,7 @@ import '../widgets/top_bar.dart';
 import 'album_page.dart';
 import 'artist_page.dart';
 import 'home_page.dart';
+import 'following_page.dart';
 import 'mine_page.dart';
 import 'playlist_page.dart';
 import 'simple_page.dart';
@@ -22,6 +23,8 @@ class HomeScreen extends StatelessWidget {
         return const HomePage();
       case AppPage.mine:
         return const MinePage();
+      case AppPage.following:
+        return const FollowingPage();
       case AppPage.favoriteSongs:
         return const SimplePage('Bài hát yêu thích');
       case AppPage.recent:

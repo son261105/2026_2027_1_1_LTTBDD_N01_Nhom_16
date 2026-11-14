@@ -331,12 +331,16 @@ class _ProfileHeader extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              const Wrap(
+              Wrap(
                 spacing: 24,
                 runSpacing: 8,
                 children: [
-                  _FollowCount(label: 'Đang theo dõi', count: 2),
-                  _FollowCount(label: 'Người theo dõi', count: 0),
+                  _FollowCount(
+                    label: 'Đang theo dõi',
+                    count: 1,
+                    onTap: () => currentPage.value = AppPage.following,
+                  ),
+                  const _FollowCount(label: 'Người theo dõi', count: 0),
                 ],
               ),
             ],
@@ -350,25 +354,30 @@ class _ProfileHeader extends StatelessWidget {
 class _FollowCount extends StatelessWidget {
   final String label;
   final int count;
+  final VoidCallback? onTap;
 
-  const _FollowCount({required this.label, required this.count});
+  const _FollowCount({required this.label, required this.count, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        children: [
-          TextSpan(text: '$label · '),
-          TextSpan(
-            text: '$count',
-            style: const TextStyle(color: Colors.white),
-          ),
-        ],
-      ),
-      style: const TextStyle(
-        color: AppColors.textSecondary,
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(4),
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(text: '$label · '),
+            TextSpan(
+              text: '$count',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+        style: const TextStyle(
+          color: AppColors.textSecondary,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
