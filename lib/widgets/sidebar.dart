@@ -62,11 +62,6 @@ class Sidebar extends StatelessWidget {
                   selected: page == AppPage.playlistChill,
                   onTap: () => currentPage.value = AppPage.playlistChill,
                 ),
-                const _LibraryItem(
-                  color: Color(0xFF6D28D9),
-                  label: 'Nhạc remix',
-                  imagePath: 'imgs/NhuMotNguoiDung.jpg',
-                ),
                 const SizedBox(height: 28),
                 const _SectionTitle('ALBUM YÊU THÍCH'),
                 const SizedBox(height: 8),
