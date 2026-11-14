@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
+import '../widgets/cover_art.dart';
 
 class FollowingPage extends StatelessWidget {
   const FollowingPage({super.key});
@@ -65,7 +67,84 @@ class FollowingPage extends StatelessWidget {
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
+            const SizedBox(height: 24),
+            const _FollowedArtistCard(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FollowedArtistCard extends StatelessWidget {
+  const _FollowedArtistCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 280),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () => currentPage.value = AppPage.artist,
+          hoverColor: AppColors.surface,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const AspectRatio(
+                  aspectRatio: 1,
+                  child: CoverArt(
+                    color: Color(0xFFE11D48),
+                    image: 'imgs/NgheSiSonTung.jpg',
+                    icon: Icons.person,
+                    circle: true,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  'Sơn Tùng M-TP',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  '142332 người theo dõi',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 13,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white38),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    'Đang theo dõi',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
