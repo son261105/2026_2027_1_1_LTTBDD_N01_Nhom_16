@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 
 const _pink = Color(0xFFFF4D8D);
+const _cyan = Color(0xFF00D4E8);
 
 const _albumName = 'M-TP';
 const _albumYear = 2026;
@@ -36,6 +37,20 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> {
   final List<_AlbumSong> _songs = List.of(_originalSongs);
   bool _isLiked = false;
+  bool _isShuffle = false;
+
+  void _toggleShuffle() {
+    setState(() {
+      _isShuffle = !_isShuffle;
+      if (_isShuffle) {
+        _songs.shuffle();
+      } else {
+        _songs
+          ..clear()
+          ..addAll(_originalSongs);
+      }
+    });
+  }
 
   Future<void> _shareAlbum() async {
     await Clipboard.setData(
@@ -68,6 +83,8 @@ class _AlbumPageState extends State<AlbumPage> {
               isLiked: _isLiked,
               onLike: () => setState(() => _isLiked = !_isLiked),
               onShare: _shareAlbum,
+              isShuffle: _isShuffle,
+              onShuffle: _toggleShuffle,
             ),
           ],
         ),
@@ -81,12 +98,16 @@ class _AlbumHeader extends StatelessWidget {
   final bool isLiked;
   final VoidCallback onLike;
   final VoidCallback onShare;
+  final bool isShuffle;
+  final VoidCallback onShuffle;
 
   const _AlbumHeader({
     required this.songCount,
     required this.isLiked,
     required this.onLike,
     required this.onShare,
+    required this.isShuffle,
+    required this.onShuffle,
   });
 
   @override
@@ -121,7 +142,7 @@ class _AlbumHeader extends StatelessWidget {
                 _albumName,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 44,
+                  fontSize: 32,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -148,7 +169,7 @@ class _AlbumHeader extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -192,6 +213,41 @@ class _AlbumHeader extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  FilledButton.icon(
+                    onPressed: () {},
+                    style: FilledButton.styleFrom(
+                      backgroundColor: _cyan,
+                      foregroundColor: Colors.black,
+                      minimumSize: const Size(212, 50),
+                      shape: const StadiumBorder(),
+                      textStyle: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    icon: const Icon(Icons.play_arrow_rounded, size: 28),
+                    label: const Text('Phát tất cả'),
+                  ),
+                  IconButton.filled(
+                    tooltip: isShuffle ? 'Tắt trộn bài' : 'Trộn bài',
+                    onPressed: onShuffle,
+                    isSelected: isShuffle,
+                    style: IconButton.styleFrom(
+                      backgroundColor: const Color(0xFF2F2F2F),
+                      foregroundColor: isShuffle ? _cyan : Colors.white,
+                      fixedSize: const Size(50, 50),
+                      shape: const CircleBorder(),
+                    ),
+                    icon: const Icon(Icons.shuffle_rounded, size: 25),
                   ),
                 ],
               ),
