@@ -95,14 +95,43 @@ class GroupInfoPage extends StatelessWidget {
             const SizedBox(height: 8),
             const Text(
               'Giảng viên: ThS. Nguyễn Xuân Quế',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 15,
-                height: 1.6,
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 15, height: 1.6),
             ),
+            const Divider(height: 56, thickness: 1, color: Colors.white24),
+            const _ProjectOverview(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ProjectOverview extends StatelessWidget {
+  const _ProjectOverview();
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 960),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Giới thiệu dự án Music',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Music là dự án xây dựng giao diện website nghe nhạc, '
+            'giúp người dùng khám phá bài hát, album và nghệ sĩ, '
+            'đồng thời theo dõi thư viện âm nhạc cá nhân.',
+            style: TextStyle(color: Colors.white, fontSize: 15, height: 1.7),
+          ),
+        ],
       ),
     );
   }
