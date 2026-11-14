@@ -6,6 +6,7 @@ final ValueNotifier<bool> queueOpen = ValueNotifier<bool>(false);
 enum AppPage {
   home,
   mine,
+  groupInfo,
   following,
   favoriteSongs,
   recent,

@@ -11,6 +11,7 @@ import 'home_page.dart';
 import 'following_page.dart';
 import 'favorite_songs_page.dart';
 import 'mine_page.dart';
+import 'group_info_page.dart';
 import 'playlist_page.dart';
 import 'recent_page.dart';
 import 'simple_page.dart';
@@ -25,6 +26,8 @@ class HomeScreen extends StatelessWidget {
         return const HomePage();
       case AppPage.mine:
         return const MinePage();
+      case AppPage.groupInfo:
+        return const GroupInfoPage();
       case AppPage.following:
         return const FollowingPage();
       case AppPage.favoriteSongs:

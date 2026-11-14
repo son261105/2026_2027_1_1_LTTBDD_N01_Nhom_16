@@ -20,6 +20,11 @@ class TopBar extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: 760),
               child: Row(
                 children: [
+                  _PremiumButton(
+                    label: 'Thông tin nhóm',
+                    onTap: () => currentPage.value = AppPage.groupInfo,
+                  ),
+                  SizedBox(width: 32),
                   _HomeButton(),
                   SizedBox(width: 8),
                   Expanded(child: _SearchBar()),
@@ -146,7 +151,10 @@ class _SettingsButton extends StatelessWidget {
 }
 
 class _PremiumButton extends StatelessWidget {
-  const _PremiumButton();
+  final String label;
+  final VoidCallback? onTap;
+
+  const _PremiumButton({this.label = 'Khám phá Premium', this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -156,12 +164,12 @@ class _PremiumButton extends StatelessWidget {
       child: InkWell(
         customBorder: const StadiumBorder(),
         hoverColor: Colors.black12,
-        onTap: () {},
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        onTap: onTap ?? () {},
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           child: Text(
-            'Khám phá Premium',
-            style: TextStyle(
+            label,
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: 13,
