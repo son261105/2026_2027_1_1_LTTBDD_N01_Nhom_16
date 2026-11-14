@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
-class _PlaylistSong {
+class PlaylistSong {
   final String title;
   final String artist;
   final String image;
   final String duration;
 
-  const _PlaylistSong(this.title, this.artist, this.image, this.duration);
+  const PlaylistSong(this.title, this.artist, this.image, this.duration);
 }
 
 const _songs = [
-  _PlaylistSong('Đi Về Nhà', 'Đen Vâu', 'imgs/DiVeNha.jpg', '04:23'),
-  _PlaylistSong(
+  PlaylistSong('Đi Về Nhà', 'Đen Vâu', 'imgs/DiVeNha.jpg', '04:23'),
+  PlaylistSong(
     'Nơi Này Có Anh',
     'Sơn Tùng M-TP',
     'imgs/NoiNayCoAnh.jpg',
     '04:57',
   ),
-  _PlaylistSong(
-    'Vợ Người Ta',
-    'Phan Mạnh Quỳnh',
-    'imgs/VoNguoiTa.jpg',
-    '05:45',
-  ),
+  PlaylistSong('Vợ Người Ta', 'Phan Mạnh Quỳnh', 'imgs/VoNguoiTa.jpg', '05:45'),
 ];
 
 const _cyan = Color(0xFF00D4E8);
@@ -221,7 +216,8 @@ class _SongTable extends StatelessWidget {
       children: [
         const _TableHeader(),
         const SizedBox(height: 8),
-        for (var i = 0; i < _songs.length; i++) _SongRow(i + 1, _songs[i]),
+        for (var i = 0; i < _songs.length; i++)
+          PlaylistSongRow(i + 1, _songs[i]),
       ],
     );
   }
@@ -265,11 +261,11 @@ class _TableHeader extends StatelessWidget {
   }
 }
 
-class _SongRow extends StatelessWidget {
+class PlaylistSongRow extends StatelessWidget {
   final int index;
-  final _PlaylistSong song;
+  final PlaylistSong song;
 
-  const _SongRow(this.index, this.song);
+  const PlaylistSongRow(this.index, this.song, {super.key});
 
   @override
   Widget build(BuildContext context) {

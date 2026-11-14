@@ -99,48 +99,60 @@ class _FavoriteSongTable extends StatelessWidget {
               child: Text('Chưa có bài hát yêu thích'),
             ),
           for (var index = 0; index < songs.length; index++)
-            Padding(
+            Material(
               key: ValueKey(songs[index].title),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: _columns(
-                number: Text('${index + 1}'),
-                title: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Image.asset(
-                        songs[index].image,
-                        width: 38,
-                        height: 38,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        songs[index].title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                hoverColor: AppColors.surface,
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: _columns(
+                    number: Text('${index + 1}'),
+                    title: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.asset(
+                            songs[index].image,
+                            width: 38,
+                            height: 38,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            songs[index].title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                artist: Text(
-                  songs[index].artist,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                duration: Text(songs[index].duration),
-                action: IconButton(
-                  tooltip: 'Xóa khỏi yêu thích',
-                  icon: const Icon(Icons.delete_outline_rounded, size: 20),
-                  color: AppColors.textSecondary,
-                  onPressed: () {},
+                    artist: Text(
+                      songs[index].artist,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    duration: Text(songs[index].duration),
+                    action: IconButton(
+                      tooltip: 'Xóa khỏi yêu thích',
+                      icon: const Icon(Icons.delete_outline_rounded, size: 20),
+                      color: AppColors.textSecondary,
+                      onPressed: () {},
+                    ),
+                  ),
                 ),
               ),
             ),

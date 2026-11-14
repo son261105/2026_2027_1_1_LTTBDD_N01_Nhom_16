@@ -1,5 +1,33 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import 'playlist_page.dart' show PlaylistSong, PlaylistSongRow;
+
+const _recentSongs = [
+  (
+    title: 'Tìm Em',
+    artist: 'Hngle, Bảo Anh',
+    image: 'imgs/TimEm.jpg',
+    duration: '04:12',
+  ),
+  (
+    title: 'Nơi Này Có Anh',
+    artist: 'Sơn Tùng M-TP',
+    image: 'imgs/NoiNayCoAnh.jpg',
+    duration: '04:57',
+  ),
+  (
+    title: 'Đi Về Nhà',
+    artist: 'Đen Vâu',
+    image: 'imgs/DiVeNha.jpg',
+    duration: '04:23',
+  ),
+  (
+    title: 'Vợ Người Ta',
+    artist: 'Phan Mạnh Quỳnh',
+    image: 'imgs/VoNguoiTa.jpg',
+    duration: '05:45',
+  ),
+];
 
 class RecentPage extends StatelessWidget {
   const RecentPage({super.key});
@@ -59,8 +87,74 @@ class RecentPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 24),
+            const _RecentSongsTable(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _RecentSongsTable extends StatelessWidget {
+  const _RecentSongsTable();
+
+  Widget _columns({
+    required Widget number,
+    required Widget title,
+    required Widget artist,
+    required Widget duration,
+  }) {
+    return Row(
+      children: [
+        SizedBox(width: 40, child: number),
+        Expanded(flex: 5, child: title),
+        Expanded(flex: 3, child: artist),
+        SizedBox(
+          width: 80,
+          child: Align(alignment: Alignment.centerRight, child: duration),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: _columns(
+              number: const Text('#'),
+              title: const Text(
+                'Tiêu đề',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              artist: const Text(
+                'Nghệ sĩ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              duration: const Icon(
+                Icons.access_time,
+                color: AppColors.textSecondary,
+                size: 20,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          for (var index = 0; index < _recentSongs.length; index++)
+            PlaylistSongRow(
+              index + 1,
+              PlaylistSong(
+                _recentSongs[index].title,
+                _recentSongs[index].artist,
+                _recentSongs[index].image,
+                _recentSongs[index].duration,
+              ),
+            ),
+        ],
       ),
     );
   }
