@@ -12,6 +12,7 @@ import 'following_page.dart';
 import 'favorite_songs_page.dart';
 import 'mine_page.dart';
 import 'playlist_page.dart';
+import 'recent_page.dart';
 import 'simple_page.dart';
 import 'song_page.dart';
 
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
       case AppPage.favoriteSongs:
         return const FavoriteSongsPage();
       case AppPage.recent:
-        return const SimplePage('Nghe gần đây');
+        return const RecentPage();
       case AppPage.favoriteArtists:
         return const SimplePage('Nghệ sĩ yêu thích');
       case AppPage.playlistChill:
