@@ -26,7 +26,21 @@ class MinePage extends StatelessWidget {
             SizedBox(height: 20),
             _LibrarySummary(),
             SizedBox(height: 40),
-            _CreatedPlaylists(),
+            _CollectionSection(
+              heading: 'Playlist đã tạo (1)',
+              title: 'Nhạc chill',
+              subtitle: '3 bài hát',
+              image: 'imgs/NgheSiDenVau.jpg',
+              destination: AppPage.playlistChill,
+            ),
+            SizedBox(height: 40),
+            _CollectionSection(
+              heading: 'Album yêu thích (1)',
+              title: 'M-TP',
+              subtitle: 'Sơn Tùng M-TP · 2026',
+              image: 'imgs/AlbumMTP.jpg',
+              destination: AppPage.album,
+            ),
           ],
         ),
       ),
@@ -34,17 +48,29 @@ class MinePage extends StatelessWidget {
   }
 }
 
-class _CreatedPlaylists extends StatelessWidget {
-  const _CreatedPlaylists();
+class _CollectionSection extends StatelessWidget {
+  final String heading;
+  final String title;
+  final String subtitle;
+  final String image;
+  final AppPage destination;
+
+  const _CollectionSection({
+    required this.heading,
+    required this.title,
+    required this.subtitle,
+    required this.image,
+    required this.destination,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Playlist đã tạo (1)',
-          style: TextStyle(
+        Text(
+          heading,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -58,7 +84,7 @@ class _CreatedPlaylists extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
-              onTap: () => currentPage.value = AppPage.playlistChill,
+              onTap: () => currentPage.value = destination,
               hoverColor: AppColors.surface,
               child: Padding(
                 padding: const EdgeInsets.all(8),
@@ -69,25 +95,22 @@ class _CreatedPlaylists extends StatelessWidget {
                       aspectRatio: 1,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'imgs/NgheSiDenVau.jpg',
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.asset(image, fit: BoxFit.cover),
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      'Nhạc chill',
-                      style: TextStyle(
+                    Text(
+                      title,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      '3 bài hát',
-                      style: TextStyle(
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 13,
                       ),
