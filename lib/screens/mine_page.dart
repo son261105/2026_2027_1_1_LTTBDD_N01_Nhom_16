@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/favorite_songs.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
@@ -145,13 +146,16 @@ class _LibrarySummary extends StatelessWidget {
             children: [
               SizedBox(
                 width: width,
-                child: _SummaryCard(
-                  title: 'Bài hát yêu thích',
-                  subtitle: '4 bài hát',
-                  icon: Icons.favorite,
-                  colors: const [Color(0xFF465151), Color(0xFF172323)],
-                  image: 'imgs/AlbumMTP.jpg',
-                  onTap: () => currentPage.value = AppPage.favoriteSongs,
+                child: ValueListenableBuilder<List<FavoriteTrack>>(
+                  valueListenable: favoriteSongs,
+                  builder: (context, songs, _) => _SummaryCard(
+                    title: 'Bài hát yêu thích',
+                    subtitle: '${songs.length} bài hát',
+                    icon: Icons.favorite,
+                    colors: const [Color(0xFF465151), Color(0xFF172323)],
+                    image: 'imgs/AlbumMTP.jpg',
+                    onTap: () => currentPage.value = AppPage.favoriteSongs,
+                  ),
                 ),
               ),
               SizedBox(
