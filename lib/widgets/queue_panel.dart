@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../state/app_translations.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
+import 'cover_art.dart';
 
 class _QueueSong {
   final String title;
@@ -136,14 +137,11 @@ class _QueueItem extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: Image.asset(
-                  song.image,
-                  width: 44,
-                  height: 44,
-                  fit: BoxFit.cover,
-                ),
+              CoverArt(
+                image: song.image,
+                size: 44,
+                radius: 6,
+                color: AppColors.surface,
               ),
               const SizedBox(width: 12),
               Expanded(
