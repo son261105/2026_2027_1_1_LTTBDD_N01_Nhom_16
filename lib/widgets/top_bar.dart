@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_language.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
@@ -34,12 +35,12 @@ class TopBar extends StatelessWidget {
               ),
             ),
           ),
-          // Phải: avatar người dùng + nút cài đặt
+          // Phải: avatar người dùng và lựa chọn ngôn ngữ.
           Align(
             alignment: Alignment.centerRight,
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [_Avatar(), SizedBox(width: 8), _SettingsButton()],
+              children: [_Avatar(), SizedBox(width: 8), _LanguageButton()],
             ),
           ),
         ],
@@ -128,22 +129,61 @@ class _Avatar extends StatelessWidget {
   }
 }
 
-class _SettingsButton extends StatelessWidget {
-  const _SettingsButton();
+class _LanguageButton extends StatelessWidget {
+  const _LanguageButton();
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      shape: const CircleBorder(),
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        hoverColor: AppColors.surfaceHover,
-        onTap: () {},
-        child: const SizedBox(
-          width: 44,
-          height: 44,
-          child: Icon(Icons.settings_outlined, color: AppColors.textSecondary),
+    return ValueListenableBuilder<AppLanguage>(
+      valueListenable: appLanguage,
+      builder: (context, language, _) => Material(
+        color: Colors.white,
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: PopupMenuButton<AppLanguage>(
+          tooltip: language == AppLanguage.vietnamese ? 'Ngôn ngữ' : 'Language',
+          initialValue: language,
+          onSelected: (value) => appLanguage.value = value,
+          position: PopupMenuPosition.under,
+          color: AppColors.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          itemBuilder: (context) => [
+            CheckedPopupMenuItem(
+              value: AppLanguage.vietnamese,
+              checked: language == AppLanguage.vietnamese,
+              child: const Text('Tiếng Việt'),
+            ),
+            CheckedPopupMenuItem(
+              value: AppLanguage.english,
+              checked: language == AppLanguage.english,
+              child: const Text('English'),
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.language, color: Colors.black, size: 20),
+                const SizedBox(width: 6),
+                Text(
+                  language == AppLanguage.vietnamese ? 'VI' : 'EN',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black,
+                  size: 18,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
