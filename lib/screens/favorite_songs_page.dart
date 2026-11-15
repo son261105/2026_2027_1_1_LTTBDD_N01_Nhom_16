@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/favorite_songs.dart';
 import '../theme/app_colors.dart';
 import 'playlist_page.dart';
@@ -25,7 +26,7 @@ class FavoriteSongsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PlaylistHeader(
-                title: 'Bài hát yêu thích',
+                title: context.tr('Bài hát yêu thích'),
                 image: 'imgs/AnhNgheSiAmee.jpg',
                 description:
                     'Đen Vâu , Sơn Tùng M-TP , Phan Mạnh Quỳnh , Hngle , Bảo Anh',
@@ -82,8 +83,8 @@ class _FavoriteSongTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: _columns(
               number: const Text('#'),
-              title: const Text('Tên bài hát'),
-              artist: const Text('Nghệ sĩ'),
+              title: Text(context.tr('Tên bài hát')),
+              artist: Text(context.tr('Nghệ sĩ')),
               duration: const Icon(
                 Icons.access_time,
                 color: AppColors.textSecondary,
@@ -94,9 +95,9 @@ class _FavoriteSongTable extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           if (songs.isEmpty)
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(24),
-              child: Text('Chưa có bài hát yêu thích'),
+              child: Text(context.tr('Chưa có bài hát yêu thích')),
             ),
           for (var index = 0; index < songs.length; index++)
             Material(
@@ -147,7 +148,7 @@ class _FavoriteSongTable extends StatelessWidget {
                     ),
                     duration: Text(songs[index].duration),
                     action: IconButton(
-                      tooltip: 'Xóa khỏi yêu thích',
+                      tooltip: context.tr('Xóa khỏi yêu thích'),
                       icon: const Icon(Icons.delete_outline_rounded, size: 20),
                       color: AppColors.textSecondary,
                       onPressed: () {},

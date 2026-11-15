@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../theme/app_colors.dart';
 
 class GroupInfoPage extends StatelessWidget {
@@ -21,8 +22,8 @@ class GroupInfoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Thông tin nhóm',
+            Text(
+              context.tr('Thông tin nhóm'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -58,8 +59,8 @@ class GroupInfoPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
-                        'Lớp: CNTT6',
+                      Text(
+                        context.tr('Lớp: CNTT6'),
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 15,
@@ -67,7 +68,7 @@ class GroupInfoPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Phát triển toàn bộ dự án',
+                        context.tr('Phát triển toàn bộ dự án'),
                         style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.85),
                           fontSize: 15,
@@ -79,8 +80,8 @@ class GroupInfoPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 36),
-            const Text(
-              'Thông tin môn học',
+            Text(
+              context.tr('Thông tin môn học'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -88,13 +89,13 @@ class GroupInfoPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Môn học: Lập Trình Thiết Bị Di Động',
+            Text(
+              context.tr('Môn học: Lập Trình Thiết Bị Di Động'),
               style: TextStyle(color: Colors.white, fontSize: 16, height: 1.6),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Giảng viên: ThS. Nguyễn Xuân Quế',
+            Text(
+              context.tr('Giảng viên: ThS. Nguyễn Xuân Quế'),
               style: TextStyle(color: Colors.white, fontSize: 15, height: 1.6),
             ),
             const Divider(height: 56, thickness: 1, color: Colors.white24),
@@ -113,11 +114,11 @@ class _ProjectOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 960),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Giới thiệu dự án Music',
+            context.tr('Giới thiệu dự án Music'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 22,
@@ -126,9 +127,11 @@ class _ProjectOverview extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            'Music là dự án xây dựng giao diện website nghe nhạc, '
-            'giúp người dùng khám phá bài hát, album và nghệ sĩ, '
-            'đồng thời theo dõi thư viện âm nhạc cá nhân.',
+            context.tr(
+              'Music là dự án xây dựng giao diện website nghe nhạc, '
+              'giúp người dùng khám phá bài hát, album và nghệ sĩ, '
+              'đồng thời theo dõi thư viện âm nhạc cá nhân.',
+            ),
             style: TextStyle(color: Colors.white, fontSize: 15, height: 1.7),
           ),
         ],

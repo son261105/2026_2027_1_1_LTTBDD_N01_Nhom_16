@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../models/song.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
@@ -21,20 +22,23 @@ class HomePage extends StatelessWidget {
           stops: [0, 0.35],
         ),
       ),
-      child: const SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SectionHeader('Bảng Xếp Hạng'),
+            _SectionHeader(context.tr('Bảng Xếp Hạng')),
             SizedBox(height: 16),
             _ChartsRow(),
             SizedBox(height: 32),
-            _SectionHeader('Nghệ sĩ thịnh hành', action: 'Hiện tất cả'),
+            _SectionHeader(
+              context.tr('Nghệ sĩ thịnh hành'),
+              action: context.tr('Hiện tất cả'),
+            ),
             SizedBox(height: 16),
             _ArtistsRow(),
             SizedBox(height: 32),
-            _SectionHeader('Album Hot', action: 'Thêm'),
+            _SectionHeader(context.tr('Album Hot'), action: context.tr('Thêm')),
             SizedBox(height: 16),
             _AlbumsRow(),
             SizedBox(height: 48),
@@ -233,7 +237,7 @@ class _ChartCard extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        chart.title,
+                        context.tr(chart.title),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -275,13 +279,13 @@ class _PlayPill extends StatelessWidget {
       child: InkWell(
         customBorder: const StadiumBorder(),
         onTap: () {},
-        child: const Padding(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Phát',
+                context.tr('Phát'),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -506,8 +510,8 @@ class _ArtistCardState extends State<_ArtistCard> {
                 ),
               ),
               const SizedBox(height: 4),
-              const Text(
-                'Nghệ sĩ',
+              Text(
+                context.tr('Nghệ sĩ'),
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
             ],

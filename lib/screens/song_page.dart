@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../models/song.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
@@ -86,8 +87,8 @@ class _TimEmLyricsState extends State<_TimEmLyrics> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Lời bài hát',
+        Text(
+          context.tr('Lời bài hát'),
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -115,7 +116,9 @@ class _TimEmLyricsState extends State<_TimEmLyrics> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          child: Text(_expanded ? 'Thu gọn' : '...Xem thêm'),
+          child: Text(
+            _expanded ? context.tr('Thu gọn') : context.tr('...Xem thêm'),
+          ),
         ),
       ],
     );
@@ -138,8 +141,8 @@ class _SongHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Bài hát',
+              Text(
+                context.tr('Bài hát'),
                 style: TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 14,
@@ -236,7 +239,7 @@ class _AddToPlaylistButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Thêm vào playlist',
+      message: context.tr('Thêm vào playlist'),
       child: Material(
         color: _grayButton,
         shape: const CircleBorder(),
@@ -265,7 +268,7 @@ class _PlayButton extends StatelessWidget {
       child: InkWell(
         customBorder: const StadiumBorder(),
         onTap: () {},
-        child: const SizedBox(
+        child: SizedBox(
           width: 170,
           height: 48,
           child: Row(
@@ -274,7 +277,7 @@ class _PlayButton extends StatelessWidget {
               Icon(Icons.play_arrow, color: Colors.black, size: 22),
               SizedBox(width: 8),
               Text(
-                'Phát',
+                context.tr('Phát'),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -300,7 +303,7 @@ class _DownloadButton extends StatelessWidget {
       child: InkWell(
         customBorder: const StadiumBorder(),
         onTap: () {},
-        child: const SizedBox(
+        child: SizedBox(
           width: 170,
           height: 48,
           child: Row(
@@ -309,7 +312,7 @@ class _DownloadButton extends StatelessWidget {
               Icon(Icons.download_outlined, color: Colors.white, size: 22),
               SizedBox(width: 8),
               Text(
-                'Tải về',
+                context.tr('Tải về'),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -338,8 +341,8 @@ class _ArtistsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Nghệ sĩ',
+          Text(
+            context.tr('Nghệ sĩ'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -389,7 +392,7 @@ class _ArtistTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${artist.followers} người theo dõi',
+                  context.tr('${artist.followers} người theo dõi'),
                   style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 14,
@@ -429,7 +432,7 @@ class _FollowButtonState extends State<_FollowButton> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
           child: Text(
-            _following ? 'Đang theo dõi' : 'Theo dõi',
+            _following ? context.tr('Đang theo dõi') : context.tr('Theo dõi'),
             style: TextStyle(
               color: _following ? Colors.black : Colors.white,
               fontSize: 14,

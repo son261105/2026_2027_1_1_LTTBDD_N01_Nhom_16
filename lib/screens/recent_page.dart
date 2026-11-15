@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../theme/app_colors.dart';
 import 'playlist_page.dart' show PlaylistSong, PlaylistSongRow;
 
@@ -52,7 +53,7 @@ class RecentPage extends StatelessWidget {
             Row(
               children: [
                 IconButton.filled(
-                  tooltip: 'Phát tất cả',
+                  tooltip: context.tr('Phát tất cả'),
                   onPressed: () {},
                   style: IconButton.styleFrom(
                     backgroundColor: const Color(0xFF00D4E8),
@@ -63,11 +64,11 @@ class RecentPage extends StatelessWidget {
                   icon: const Icon(Icons.play_arrow_rounded, size: 34),
                 ),
                 const SizedBox(width: 16),
-                const Expanded(
+                Expanded(
                   child: Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: 'Bài hát đã phát '),
+                        TextSpan(text: context.tr('Bài hát đã phát ')),
                         TextSpan(
                           text: '(4)',
                           style: TextStyle(
@@ -128,12 +129,12 @@ class _RecentSongsTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: _columns(
               number: const Text('#'),
-              title: const Text(
-                'Tiêu đề',
+              title: Text(
+                context.tr('Tiêu đề'),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              artist: const Text(
-                'Nghệ sĩ',
+              artist: Text(
+                context.tr('Nghệ sĩ'),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               duration: const Icon(

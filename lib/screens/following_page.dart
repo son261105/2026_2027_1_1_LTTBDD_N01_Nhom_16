@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 import '../widgets/cover_art.dart';
@@ -45,8 +46,8 @@ class FollowingPage extends StatelessWidget {
                     bottom: BorderSide(color: Color(0xFF00D4E8), width: 3),
                   ),
                 ),
-                child: const Text(
-                  'Đang theo dõi · 1',
+                child: Text(
+                  context.tr('Đang theo dõi · 1'),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -62,8 +63,8 @@ class FollowingPage extends StatelessWidget {
                 color: const Color(0xFF00D4E8),
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Text(
-                'Nghệ sĩ',
+              child: Text(
+                context.tr('Nghệ sĩ'),
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
@@ -116,9 +117,9 @@ class _FollowedArtistCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  '142332 người theo dõi',
-                  style: TextStyle(
+                Text(
+                  context.tr('142332 người theo dõi'),
+                  style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 13,
                   ),
@@ -133,8 +134,8 @@ class _FollowedArtistCard extends StatelessWidget {
                     border: Border.all(color: Colors.white38),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    'Đang theo dõi',
+                  child: Text(
+                    context.tr('Đang theo dõi'),
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 13,

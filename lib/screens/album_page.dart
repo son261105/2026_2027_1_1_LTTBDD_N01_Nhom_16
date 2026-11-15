@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 
@@ -58,7 +59,7 @@ class _AlbumPageState extends State<AlbumPage> {
     );
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Đã sao chép thông tin album')),
+      SnackBar(content: Text(context.tr('Đã sao chép thông tin album'))),
     );
   }
 
@@ -131,12 +132,12 @@ class _AlbumSongTable extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 12, 16, 20),
             child: _columns(
               number: const Text('#'),
-              title: const Text(
-                'Tiêu đề',
+              title: Text(
+                context.tr('Tiêu đề'),
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
-              artist: const Text(
-                'Nghệ sĩ',
+              artist: Text(
+                context.tr('Nghệ sĩ'),
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               duration: const Icon(
@@ -240,7 +241,7 @@ class _AlbumHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Album  ·  $_albumYear  ·  $songCount Bài hát',
+                context.tr('Album  ·  $_albumYear  ·  $songCount Bài hát'),
                 style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 14,
@@ -286,7 +287,9 @@ class _AlbumHeader extends StatelessWidget {
                   Column(
                     children: [
                       IconButton(
-                        tooltip: isLiked ? 'Bỏ yêu thích' : 'Yêu thích album',
+                        tooltip: isLiked
+                            ? context.tr('Bỏ yêu thích')
+                            : context.tr('Yêu thích album'),
                         onPressed: onLike,
                         icon: Icon(
                           isLiked ? Icons.favorite : Icons.favorite_border,
@@ -307,7 +310,9 @@ class _AlbumHeader extends StatelessWidget {
                   Column(
                     children: [
                       IconButton(
-                        tooltip: 'Sao chép thông tin album để chia sẻ',
+                        tooltip: context.tr(
+                          'Sao chép thông tin album để chia sẻ',
+                        ),
                         onPressed: onShare,
                         icon: Transform.flip(
                           flipX: true,
@@ -318,8 +323,8 @@ class _AlbumHeader extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Text(
-                        'Chia sẻ',
+                      Text(
+                        context.tr('Chia sẻ'),
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ],
@@ -345,10 +350,12 @@ class _AlbumHeader extends StatelessWidget {
                       ),
                     ),
                     icon: const Icon(Icons.play_arrow_rounded, size: 28),
-                    label: const Text('Phát tất cả'),
+                    label: Text(context.tr('Phát tất cả')),
                   ),
                   IconButton.filled(
-                    tooltip: isShuffle ? 'Tắt trộn bài' : 'Trộn bài',
+                    tooltip: isShuffle
+                        ? context.tr('Tắt trộn bài')
+                        : context.tr('Trộn bài'),
                     onPressed: onShuffle,
                     isSelected: isShuffle,
                     style: IconButton.styleFrom(

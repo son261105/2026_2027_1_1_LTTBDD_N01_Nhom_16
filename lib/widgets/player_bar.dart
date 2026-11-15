@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
@@ -91,7 +92,7 @@ class _SongInfo extends StatelessWidget {
         const _LikeButton(),
         IconButton(
           onPressed: () {},
-          tooltip: 'Thêm vào playlist',
+          tooltip: context.tr('Thêm vào playlist'),
           icon: const Icon(Icons.add_circle_outline),
           color: Colors.white,
           iconSize: 22,
@@ -296,7 +297,7 @@ class _LyricsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _HoverTip(
-      message: 'Lời bài hát',
+      message: context.tr('Lời bài hát'),
       child: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.lyrics_outlined),
@@ -316,7 +317,7 @@ class _QueueButton extends StatelessWidget {
       valueListenable: queueOpen,
       builder: (context, open, _) {
         return _HoverTip(
-          message: 'Danh sách phát',
+          message: context.tr('Danh sách phát'),
           child: IconButton(
             onPressed: () => queueOpen.value = !open,
             icon: const Icon(Icons.queue_music),
@@ -351,7 +352,7 @@ class _VolumeControlState extends State<_VolumeControl> {
       mainAxisSize: MainAxisSize.min,
       children: [
         _HoverTip(
-          message: 'Âm lượng',
+          message: context.tr('Âm lượng'),
           child: IconButton(
             onPressed: () => setState(() => _volume = _volume == 0 ? 0.7 : 0),
             icon: Icon(_icon),

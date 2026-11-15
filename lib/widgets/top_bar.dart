@@ -8,42 +8,57 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return ValueListenableBuilder<AppLanguage>(
+      valueListenable: appLanguage,
+      builder: (context, language, _) => Container(
+        height: 64,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
 
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(alignment: Alignment.centerLeft, child: _Brand()),
-          Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 760),
-              child: Row(
-                children: [
-                  _PremiumButton(
-                    label: 'Thông tin nhóm',
-                    onTap: () => currentPage.value = AppPage.groupInfo,
-                  ),
-                  SizedBox(width: 32),
-                  _HomeButton(),
-                  SizedBox(width: 8),
-                  Expanded(child: _SearchBar()),
-                  SizedBox(width: 16),
-                  _PremiumButton(),
-                ],
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Align(alignment: Alignment.centerLeft, child: _Brand()),
+            Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 760),
+                child: Row(
+                  children: [
+                    _PremiumButton(
+                      label: language == AppLanguage.vietnamese
+                          ? 'Thông tin nhóm'
+                          : 'Group info',
+                      onTap: () => currentPage.value = AppPage.groupInfo,
+                    ),
+                    SizedBox(width: 32),
+                    _HomeButton(),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: _SearchBar(
+                        hintText: language == AppLanguage.vietnamese
+                            ? 'Bạn muốn phát nội dung gì?'
+                            : 'What do you want to play?',
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    _PremiumButton(
+                      label: language == AppLanguage.vietnamese
+                          ? 'Khám phá Premium'
+                          : 'Explore Premium',
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          // Phải: avatar người dùng và lựa chọn ngôn ngữ.
-          Align(
-            alignment: Alignment.centerRight,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [_Avatar(), SizedBox(width: 8), _LanguageButton()],
+            // Phải: avatar người dùng và lựa chọn ngôn ngữ.
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [_Avatar(), SizedBox(width: 8), _LanguageButton()],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -72,7 +87,9 @@ class _HomeButton extends StatelessWidget {
 }
 
 class _SearchBar extends StatelessWidget {
-  const _SearchBar();
+  final String hintText;
+
+  const _SearchBar({required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +99,7 @@ class _SearchBar extends StatelessWidget {
         style: const TextStyle(color: Colors.white, fontSize: 14),
         cursorColor: Colors.white,
         decoration: InputDecoration(
-          hintText: 'Bạn muốn phát nội dung gì?',
+          hintText: hintText,
           hintStyle: const TextStyle(
             color: AppColors.textSecondary,
             fontSize: 14,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../theme/app_colors.dart';
 import '../widgets/cover_art.dart';
 
@@ -110,7 +111,7 @@ class _ArtistHero extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 32,
             right: 32,
             bottom: 28,
@@ -132,7 +133,7 @@ class _ArtistHero extends StatelessWidget {
                 ),
                 SizedBox(height: 12),
                 Text(
-                  '5,4 Tr người nghe hằng tháng',
+                  context.tr('5,4 Tr người nghe hằng tháng'),
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ],
@@ -162,13 +163,13 @@ class _ArtistBody extends StatelessWidget {
           stops: [0, 0.6],
         ),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ArtistActions(),
           SizedBox(height: 32),
           Text(
-            'Phổ biến',
+            context.tr('Phổ biến'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -205,7 +206,7 @@ class _ArtistActions extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         Tooltip(
-          message: 'Trộn bài',
+          message: context.tr('Trộn bài'),
           child: IconButton(
             onPressed: () {},
             icon: const Icon(Icons.shuffle),
@@ -243,7 +244,7 @@ class _FollowButtonState extends State<_FollowButton> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
           child: Text(
-            _following ? 'Đang theo dõi' : 'Theo dõi',
+            _following ? context.tr('Đang theo dõi') : context.tr('Theo dõi'),
             style: TextStyle(
               color: _following ? Colors.black : Colors.white,
               fontSize: 14,

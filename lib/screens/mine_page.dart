@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/favorite_songs.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
@@ -18,7 +19,7 @@ class MinePage extends StatelessWidget {
           colors: [Color(0xFF1C302C), AppColors.sidebar],
         ),
       ),
-      child: const SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +29,7 @@ class MinePage extends StatelessWidget {
             _LibrarySummary(),
             SizedBox(height: 40),
             _CollectionSection(
-              heading: 'Playlist đã tạo (1)',
+              heading: context.tr('Playlist đã tạo (1)'),
               title: 'Nhạc chill',
               subtitle: '3 bài hát',
               image: 'imgs/NgheSiDenVau.jpg',
@@ -36,7 +37,7 @@ class MinePage extends StatelessWidget {
             ),
             SizedBox(height: 40),
             _CollectionSection(
-              heading: 'Album yêu thích (1)',
+              heading: context.tr('Album yêu thích (1)'),
               title: 'M-TP',
               subtitle: 'Sơn Tùng M-TP · 2026',
               image: 'imgs/AlbumMTP.jpg',
@@ -110,7 +111,7 @@ class _CollectionSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      subtitle,
+                      context.tr(subtitle),
                       style: const TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 13,
@@ -149,7 +150,7 @@ class _LibrarySummary extends StatelessWidget {
                 child: ValueListenableBuilder<List<FavoriteTrack>>(
                   valueListenable: favoriteSongs,
                   builder: (context, songs, _) => _SummaryCard(
-                    title: 'Bài hát yêu thích',
+                    title: context.tr('Bài hát yêu thích'),
                     subtitle: '${songs.length} bài hát',
                     icon: Icons.favorite,
                     colors: const [Color(0xFF465151), Color(0xFF172323)],
@@ -161,7 +162,7 @@ class _LibrarySummary extends StatelessWidget {
               SizedBox(
                 width: width,
                 child: _SummaryCard(
-                  title: 'Nghe gần đây',
+                  title: context.tr('Nghe gần đây'),
                   subtitle: '4 bài hát',
                   icon: Icons.history_rounded,
                   colors: const [
@@ -246,7 +247,7 @@ class _SummaryCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      subtitle,
+                      context.tr(subtitle),
                       style: const TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 14,
@@ -340,11 +341,11 @@ class _ProfileHeader extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   _FollowCount(
-                    label: 'Đang theo dõi',
+                    label: context.tr('Đang theo dõi'),
                     count: 1,
                     onTap: () => currentPage.value = AppPage.following,
                   ),
-                  const _FollowCount(label: 'Người theo dõi', count: 0),
+                  _FollowCount(label: context.tr('Người theo dõi'), count: 0),
                 ],
               ),
             ],

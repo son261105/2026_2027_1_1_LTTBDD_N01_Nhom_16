@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
@@ -24,36 +25,36 @@ class Sidebar extends StatelessWidget {
                 const SizedBox(height: 16),
                 _NavItem(
                   icon: Icons.home_filled,
-                  label: 'Trang chủ',
+                  label: context.tr('Trang chủ'),
                   selected: page == AppPage.home,
                   onTap: () => currentPage.value = AppPage.home,
                 ),
                 const SizedBox(height: 4),
                 _NavItem(
                   icon: Icons.person_outline,
-                  label: 'Của Tôi',
+                  label: context.tr('Của Tôi'),
                   selected: page == AppPage.mine,
                   onTap: () => currentPage.value = AppPage.mine,
                 ),
                 const SizedBox(height: 28),
-                const _SectionTitle('THƯ VIỆN'),
+                _SectionTitle(context.tr('THƯ VIỆN')),
                 const SizedBox(height: 8),
                 _LibraryItem(
                   icon: Icons.favorite,
                   color: const Color(0xFFFF4D8D),
-                  label: 'Bài hát yêu thích',
+                  label: context.tr('Bài hát yêu thích'),
                   selected: page == AppPage.favoriteSongs,
                   onTap: () => currentPage.value = AppPage.favoriteSongs,
                 ),
                 _LibraryItem(
                   icon: Icons.history,
                   color: const Color(0xFF3B82F6),
-                  label: 'Nghe gần đây',
+                  label: context.tr('Nghe gần đây'),
                   selected: page == AppPage.recent,
                   onTap: () => currentPage.value = AppPage.recent,
                 ),
                 const SizedBox(height: 28),
-                const _SectionTitle('PLAYLIST ĐÃ TẠO', showAdd: true),
+                _SectionTitle(context.tr('PLAYLIST ĐÃ TẠO'), showAdd: true),
                 const SizedBox(height: 8),
                 _LibraryItem(
                   color: const Color(0xFF0EA5A4),
@@ -63,7 +64,7 @@ class Sidebar extends StatelessWidget {
                   onTap: () => currentPage.value = AppPage.playlistChill,
                 ),
                 const SizedBox(height: 28),
-                const _SectionTitle('ALBUM YÊU THÍCH'),
+                _SectionTitle(context.tr('ALBUM YÊU THÍCH')),
                 const SizedBox(height: 8),
                 _LibraryItem(
                   color: const Color(0xFF334155),
@@ -140,13 +141,17 @@ class _SectionTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1,
+          Expanded(
+            child: Text(
+              text,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1,
+              ),
             ),
           ),
           if (showAdd)
@@ -209,12 +214,16 @@ class _LibraryItem extends StatelessWidget {
                     : Icon(icon, color: Colors.white, size: 20),
               ),
               const SizedBox(width: 12),
-              Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

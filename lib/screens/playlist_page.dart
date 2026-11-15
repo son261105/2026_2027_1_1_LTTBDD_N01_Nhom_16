@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../theme/app_colors.dart';
 
 class PlaylistSong {
@@ -122,7 +123,7 @@ class PlaylistHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  '${songCount ?? _songs.length} bài hát',
+                  context.tr('${songCount ?? _songs.length} bài hát'),
                   style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 14,
@@ -157,7 +158,7 @@ class _PlayAllButton extends StatelessWidget {
       child: InkWell(
         customBorder: const StadiumBorder(),
         onTap: () {},
-        child: const Padding(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -165,7 +166,7 @@ class _PlayAllButton extends StatelessWidget {
               Icon(Icons.play_arrow, color: Colors.black, size: 22),
               SizedBox(width: 8),
               Text(
-                'Phát tất cả',
+                context.tr('Phát tất cả'),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -186,7 +187,7 @@ class _ShuffleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Trộn bài',
+      message: context.tr('Trộn bài'),
       child: Material(
         color: const Color(0xFF2F2F2F),
         shape: const CircleBorder(),
@@ -234,7 +235,7 @@ class _TableHeader extends StatelessWidget {
       fontWeight: FontWeight.bold,
     );
 
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
@@ -242,8 +243,11 @@ class _TableHeader extends StatelessWidget {
             width: _numWidth,
             child: Text('#', style: style),
           ),
-          Expanded(flex: 5, child: Text('Tên bài hát', style: style)),
-          Expanded(flex: 3, child: Text('Nghệ sĩ', style: style)),
+          Expanded(
+            flex: 5,
+            child: Text(context.tr('Tên bài hát'), style: style),
+          ),
+          Expanded(flex: 3, child: Text(context.tr('Nghệ sĩ'), style: style)),
           SizedBox(
             width: _timeWidth,
             child: Align(

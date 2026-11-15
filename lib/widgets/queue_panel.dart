@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../state/ui_state.dart';
 import '../theme/app_colors.dart';
 
@@ -55,12 +56,16 @@ class QueuePanel extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Danh sách phát',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    context.tr('Danh sách phát'),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 IconButton(
@@ -72,12 +77,12 @@ class QueuePanel extends StatelessWidget {
               ],
             ),
           ),
-          const _SectionLabel('Đang phát'),
+          _SectionLabel(context.tr('Đang phát')),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: _QueueItem(_nowPlaying, playing: true),
           ),
-          const _SectionLabel('Tiếp theo'),
+          _SectionLabel(context.tr('Tiếp theo')),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 8),

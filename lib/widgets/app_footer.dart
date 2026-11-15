@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../state/app_translations.dart';
 import '../theme/app_colors.dart';
 
 // Đổi tên thương hiệu ở đây, cả chân trang sẽ đổi theo
@@ -89,7 +90,7 @@ class _FooterColumnView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          column.title,
+          context.tr(column.title),
           style: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -126,7 +127,7 @@ class _FooterLinkState extends State<_FooterLink> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Text(
-          widget.text,
+          context.tr(widget.text),
           style: TextStyle(
             color: _hover ? Colors.white : AppColors.textSecondary,
             fontSize: widget.fontSize,
